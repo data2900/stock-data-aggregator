@@ -5,21 +5,19 @@ from google.oauth2.service_account import Credentials
 import math
 
 # === パス設定 ===
-BASE_DIR = Path("/StockData")
+BASE_DIR = Path("/aggregation")
 PKL_FILE = BASE_DIR / "data_store.pkl"
 CREDS_FILE = BASE_DIR / "credentials.json"
 SPREADSHEET_NAME = "日本株"
 SHEET_NAME = "StockData"
 
-# === 出力対象の項目 ===
+# === 出力対象の項目（新項目を追加） ===
 TARGET_COLUMNS = [
     "株価", "予想PER", "予想配当利回り", "PBR（実績）", "ROE（予想）", "株式益回り（予想）",
+    "増収率", "経常増益率", "売上高経常利益率", "ROE", "ROA", "株主資本比率", "配当性向",
     "レーティング", "売上高予想", "経常利益予想", "規模", "割安度", "成長", "収益性",
     "安全性", "リスク", "リターン", "流動性", "トレンド", "為替", "テクニカル"
 ]
-
-# === % を付ける対象列（接頭語で判定）
-PERCENT_COLUMNS = ["予想配当利回り", "ROE（予想）", "株式益回り（予想）"]
 
 # === データ読み込み ===
 df = pd.read_pickle(PKL_FILE)
@@ -66,17 +64,10 @@ except gspread.exceptions.WorksheetNotFound:
 
 worksheet.clear()
 
-# === NaN・Infinity・%処理付きサニタイズ関数 ===
+# === NaN・Infinity 処理付きサニタイズ関数（%処理は削除） ===
 def sanitize_value(val, colname=""):
     if isinstance(val, float) and (math.isnan(val) or math.isinf(val)):
         return ""
-    if colname:
-        for pct_col in PERCENT_COLUMNS:
-            if colname.startswith(pct_col):
-                try:
-                    return f"{float(val):.2f}%"
-                except:
-                    return str(val)
     return str(val)
 
 # === 書き出し用データ整形
@@ -96,4 +87,4 @@ for _, row in final_df.iterrows():
 
 worksheet.update([header] + rows)
 
-print("✅ 最新4週データ（%付き）をスプレッドシートに出力しました。")
+print("✅ 最新4週データをスプレッドシートに出力しました。")
