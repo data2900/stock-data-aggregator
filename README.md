@@ -37,6 +37,6 @@
 
 🗓 更新履歴
 
-2025/07/17	-	merge_and_store.py・compare_and_export.py・set_conditional_formatting.gs を追加。README構成を整理。
-2025/07/25	-	sbi_scraper.py を追加（SBI証券サイトからのスクレイピング処理対応）
+2025/07/17 - merge_and_store.py・compare_and_export.py・set_conditional_formatting.gs を追加。README構成を整理。
+2025/07/25 - sbi_scraper.py を追加（SBI証券サイトからのスクレイピング処理対応）
 
