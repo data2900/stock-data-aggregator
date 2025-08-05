@@ -10,9 +10,8 @@
 
 | ファイル名 | 内容 |
 |------------|------|
-| `merge_and_store.py` | 日経・QUICKからダウンロードしたCSVを1つに統合し、`pkl`・`csv`形式で保存 |
-| `compare_and_export.py` | 最新4週分の指標データを比較・加工し、Googleスプレッドシートへ出力 |
-| `set_conditional_formatting.gs` | GAS（Google Apps Script）でスプレッドシートに条件付き書式（色分け）を適用 |
+| `compare_and_export.py` | 日経・QUICKのCSVを統合・加工し、最新4週分を比較・整形してGoogleスプレッドシートへ出力（旧：merge_and_store.py 統合済） |
+| `setConditionalFormattingForStockSheet.gs` | GAS（Google Apps Script）でスプレッドシートに条件付き書式（色分け）を適用 |
 | `sbi_scraper.py` | SBI証券サイトから財務・業績・予想データをスクレイピングして取得 |
 | `data/` | 各週の元データ（CSV形式）を格納するディレクトリ |
 | `credentials.json` | Google Sheets API 連携用の認証情報（**GitHubに公開しないでください**） |
@@ -28,15 +27,16 @@
 ---
 
 🔒 注意事項・免責
-	•	学習・個人利用目的で作成。商用利用は想定していません。
-	•	スクレイピング対象サイトの構造変更で動作が停止する可能性があります。
-	•	credentials.json（Google認証情報）は絶対に外部公開しないでください。
-	•	本ツール使用によるいかなる損害にも、作者は責任を負いません。
 
-⸻
+- 学習・個人利用目的で作成。商用利用は想定していません。
+- スクレイピング対象サイトの構造変更で動作が停止する可能性があります。
+- `credentials.json`（Google認証情報）は絶対に外部公開しないでください。
+- 本ツール使用によるいかなる損害にも、作者は責任を負いません。
+
+---
 
 🗓 更新履歴
 
-2025/07/17 - merge_and_store.py・compare_and_export.py・set_conditional_formatting.gs を追加。README構成を整理。
-2025/07/25 - sbi_scraper.py を追加（SBI証券サイトからのスクレイピング処理対応）
-
+- 2025/08/05 - `compare_and_export.py` に `merge_and_store.py` の機能を統合。`set_conditional_formatting.gs` を `setConditionalFormattingForStockSheet.gs` にリネーム。
+- 2025/07/25 - `sbi_scraper.py` を追加（SBI証券サイトからのスクレイピング処理対応）
+- 2025/07/17 - `merge_and_store.py`・`compare_and_export.py`・`set_conditional_formatting.gs` を追加。README構成を整理。
